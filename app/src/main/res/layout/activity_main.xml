@@ -1,18 +1,118 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:gravity="center"
     tools:context="com.example.asimm.wallet.MainActivity">
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Hello World!"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
 
-</android.support.constraint.ConstraintLayout>
+    <android.support.v7.widget.GridLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="30dp"
+        android:layout_marginRight="30dp"
+        android:layout_gravity="center"
+        app:columnCount="2">
+        <Button
+            android:layout_marginRight="10dp"
+            android:background="@android:color/holo_blue_dark"
+            android:textColor="@android:color/white"
+            android:textSize="20sp"
+            app:layout_columnWeight="1"
+            android:text="50"/>
+        <Button
+            android:layout_marginLeft="10dp"
+            android:textSize="20sp"
+            android:background="@android:color/holo_blue_dark"
+            android:textColor="@android:color/white"
+            app:layout_columnWeight="1"
+            android:text="100"/>
+        <Button
+            android:layout_marginTop="30dp"
+            android:layout_marginRight="10dp"
+            android:background="@android:color/holo_blue_dark"
+            android:textColor="@android:color/white"
+            app:layout_columnWeight="1"
+            android:text="500"
+            android:textSize="20sp"/>
+        <Button
+            android:layout_marginTop="30dp"
+            android:layout_marginLeft="10dp"
+            android:background="@android:color/holo_blue_dark"
+            android:textColor="@android:color/white"
+            android:text="1000"
+            app:layout_columnWeight="1"
+            android:textSize="20sp"/>
+        <Button
+            android:layout_marginTop="30dp"
+            android:layout_marginRight="10dp"
+            android:background="@android:color/holo_blue_dark"
+            android:textColor="@android:color/white"
+            android:text="5000"
+            app:layout_columnWeight="1"
+            android:textSize="20sp"/>
+        <Button
+            android:layout_marginTop="30dp"
+            android:layout_marginLeft="10dp"
+            android:background="@android:color/holo_blue_dark"
+            android:textColor="@android:color/white"
+            android:text="10000"
+            app:layout_columnWeight="1"
+            android:textSize="20sp"/>
+        <Button
+            android:layout_marginTop="30dp"
+            android:layout_marginRight="10dp"
+            android:background="@android:color/holo_blue_dark"
+            android:textColor="@android:color/white"
+            android:text="15000"
+            app:layout_columnWeight="1"
+            android:textSize="20sp"/>
+        <Button
+            android:layout_marginLeft="10dp"
+            android:layout_marginTop="30dp"
+            android:background="@android:color/holo_blue_dark"
+            android:textColor="@android:color/white"
+            android:text="50000"
+            app:layout_columnWeight="1"
+            android:textSize="20sp"/>
+
+    </android.support.v7.widget.GridLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="30dp"
+        android:gravity="center"
+        android:layout_marginLeft="30dp"
+        android:layout_marginRight="30dp"
+        >
+        <EditText
+            android:id="@+id/total"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_toLeftOf="@+id/addButton"
+            android:hint="Total"
+            android:textColorHint="@android:color/holo_blue_dark"
+            android:background="@drawable/edit_text_box"
+            android:layout_alignTop="@+id/addButton"
+            android:layout_alignBottom="@+id/addButton"
+            android:inputType="number"
+            android:paddingLeft="10dp"
+            android:layout_weight="4"/>
+        <Button
+            android:id="@+id/addButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@android:color/holo_blue_dark"
+            android:textColor="@android:color/white"
+            android:text="ADD"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentEnd="true"
+            android:layout_weight="1"/>
+
+    </RelativeLayout>
+
+</LinearLayout>
