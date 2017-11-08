@@ -5,6 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
+    android:background="@color/mainBackground"
     tools:context="com.example.asimm.wallet.MainActivity">
 
     <include
@@ -35,7 +36,7 @@
                 android:layout_marginRight="10dp"
                 android:background="@color/buttonColor"
                 android:text="50"
-                android:textColor="@android:color/white"
+                android:textColor="@color/textColor"
                 android:textSize="20sp"
                 app:layout_columnWeight="1" />
 
@@ -44,7 +45,7 @@
                 android:layout_marginLeft="10dp"
                 android:background="@color/buttonColor"
                 android:text="100"
-                android:textColor="@android:color/white"
+                android:textColor="@color/textColor"
                 android:textSize="20sp"
                 app:layout_columnWeight="1" />
 
@@ -54,7 +55,7 @@
                 android:layout_marginTop="30dp"
                 android:background="@color/buttonColor"
                 android:text="500"
-                android:textColor="@android:color/white"
+                android:textColor="@color/textColor"
                 android:textSize="20sp"
                 app:layout_columnWeight="1" />
 
@@ -64,7 +65,7 @@
                 android:layout_marginTop="30dp"
                 android:background="@color/buttonColor"
                 android:text="1000"
-                android:textColor="@android:color/white"
+                android:textColor="@color/textColor"
                 android:textSize="20sp"
                 app:layout_columnWeight="1" />
 
@@ -74,7 +75,7 @@
                 android:layout_marginTop="30dp"
                 android:background="@color/buttonColor"
                 android:text="5000"
-                android:textColor="@android:color/white"
+                android:textColor="@color/textColor"
                 android:textSize="20sp"
                 app:layout_columnWeight="1" />
 
@@ -84,7 +85,7 @@
                 android:layout_marginTop="30dp"
                 android:background="@color/buttonColor"
                 android:text="10000"
-                android:textColor="@android:color/white"
+                android:textColor="@color/textColor"
                 android:textSize="20sp"
                 app:layout_columnWeight="1" />
 
@@ -94,7 +95,7 @@
                 android:layout_marginTop="30dp"
                 android:background="@color/buttonColor"
                 android:text="15000"
-                android:textColor="@android:color/white"
+                android:textColor="@color/textColor"
                 android:textSize="20sp"
                 app:layout_columnWeight="1" />
 
@@ -104,7 +105,7 @@
                 android:layout_marginTop="30dp"
                 android:background="@color/buttonColor"
                 android:text="50000"
-                android:textColor="@android:color/white"
+                android:textColor="@color/textColor"
                 android:textSize="20sp"
                 app:layout_columnWeight="1" />
 
@@ -130,7 +131,7 @@
                 android:hint="Total"
                 android:inputType="number"
                 android:paddingLeft="10dp"
-                android:textColorHint="@android:color/holo_blue_dark" />
+                android:textColorHint="@color/buttonColor" />
 
             <Button
                 android:id="@+id/addButton"
@@ -141,7 +142,7 @@
                 android:layout_weight="1"
                 android:background="@color/buttonColor"
                 android:text="ADD"
-                android:textColor="@android:color/white" />
+                android:textColor="@color/textColor" />
 
         </RelativeLayout>
     </LinearLayout>
