@@ -2,7 +2,7 @@
 <shape xmlns:android="http://schemas.android.com/apk/res/android"
     android:dither="true">
     <stroke
-        android:color="@android:color/darker_gray"
+        android:color="@color/buttonColor"
         android:width="2dp"/>
 
     <size

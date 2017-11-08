@@ -130,6 +130,7 @@
                 android:background="@drawable/edit_text_box"
                 android:hint="Total"
                 android:inputType="number"
+                android:textColor="@color/buttonColor"
                 android:paddingLeft="10dp"
                 android:textColorHint="@color/buttonColor" />
 
