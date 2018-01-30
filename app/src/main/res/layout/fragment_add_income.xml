@@ -1,0 +1,44 @@
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.example.asimm.wallet.AddIncomeFragment">
+
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center">
+
+        <EditText
+            android:id="@+id/add_income_editext"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="5dp"
+            android:layout_marginStart="5dp"
+            android:background="@drawable/edittext_border"
+            android:gravity="center"
+            android:hint="INCOME"
+            android:inputType="numberDecimal"
+            android:padding="50dp"
+            android:textColor="@color/buttonColor"
+            android:textSize="30dp" />
+
+        <Button
+            android:id="@+id/button_add_income"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/add_income_editext"
+            android:layout_marginLeft="80dp"
+            android:layout_marginRight="80dp"
+            android:layout_marginTop="20dp"
+            android:background="@drawable/button_border"
+            android:text="ADD"
+            android:textColor="@color/mainBackground"
+            android:textSize="17dp"
+            android:textStyle="bold" />
+
+
+    </RelativeLayout>
+
+</FrameLayout>

@@ -5,8 +5,11 @@
     <color name="colorAccent">#FF4081</color>
 
     <!--Button Color-->
-    <color name="buttonColor">#ffffff</color>
-    <color name="textColor">#206da1</color>
+    <color name="buttonColor">#b05b53</color>
+    <color name="textColor">#ffffff</color>
 
-    <color name="mainBackground">#206da1</color>
+    <color name="mainBackground">#ffffff</color>
 </resources>
+
+<!--
+206dal-->
