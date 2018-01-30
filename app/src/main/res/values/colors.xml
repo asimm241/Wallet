@@ -7,7 +7,7 @@
     <!--Button Color-->
     <color name="buttonColor">#b05b53</color>
     <color name="textColor">#ffffff</color>
-
+    <color name="tabtextColor">#D3D3D3</color>
     <color name="mainBackground">#ffffff</color>
 </resources>
 

@@ -9,7 +9,7 @@
         android:layout_width="match_parent"
         android:layout_height="?attr/actionBarSize"
         android:background="@color/buttonColor"
-        android:elevation="4dp">
+        android:elevation="@dimen/_6sdp">
 
 
         <RelativeLayout
@@ -51,16 +51,9 @@
                 android:text="RS "
                 android:textColor="@color/textColor" />
 
-
-            <android.support.design.widget.TabLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:id="@+id/tablayout"
-                android:layout_below="@id/lable">
-
-            </android.support.design.widget.TabLayout>
-
         </RelativeLayout>
+
+
     </android.support.v7.widget.Toolbar>
 
 </RelativeLayout>
