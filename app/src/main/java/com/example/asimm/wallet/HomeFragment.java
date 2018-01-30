@@ -1,9 +1,11 @@
 package com.example.asimm.wallet;
 
 
+import android.content.DialogInterface;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.Toolbar;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -11,6 +13,9 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
+
+import com.example.asimm.wallet.Utilities.PreferencesUtilities;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -67,6 +72,35 @@ public class HomeFragment extends Fragment {
         // Required empty public constructor
     }
 
+    private void setIncome() {
+        String text = mTotalEditText.getText().toString();
+        if (text.equals("") || text == null) {
+            Toast.makeText(getContext(), "No Spending Entered", Toast.LENGTH_LONG).show();
+            return;
+        } else {
+            float expense = Float.parseFloat(text);
+            double prevIncome = PreferencesUtilities.readIncome();
+            final double newIncome = prevIncome - expense;
+            if (newIncome < 0) {
+                AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
+                builder.setMessage("Your Income is less than you spending. \n are you sure you want to spend")
+                        .setPositiveButton("YES", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                PreferencesUtilities.writeIncome(newIncome);
+                                incomeTextView.setText(Double.toString(newIncome));
+                                mTotalEditText.setText("");
+                            }
+                        }).setNegativeButton("NO", null).create().show();
+            } else {
+                PreferencesUtilities.writeIncome(newIncome);
+                incomeTextView.setText(Double.toString(newIncome));
+                mTotalEditText.setText("");
+
+            }
+        }
+
+    }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -119,11 +153,6 @@ public class HomeFragment extends Fragment {
             default:
                 break;
         }
-    }
-
-    private void setIncome() {
-        String text = incomeTextView.getText().toString();
-
     }
 
     private void addTotal(float val) {
