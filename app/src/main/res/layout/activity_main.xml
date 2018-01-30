@@ -1,151 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
+
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
-    android:background="@color/mainBackground"
-    tools:context="com.example.asimm.wallet.MainActivity">
+    android:orientation="vertical">
 
     <include
         android:id="@+id/toolbarLayout"
         layout="@layout/toolbar" />
 
-    <LinearLayout
+
+    <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:id="@+id/framelayout_main"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_gravity="center"
-        android:gravity="center">
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:layout_gravity="center">
+        android:layout_height="match_parent" />
 
-        <android.support.v7.widget.GridLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_gravity="center"
-            android:layout_marginLeft="30dp"
-            android:layout_marginRight="30dp"
-            app:columnCount="2">
-
-            <Button
-                android:id="@+id/quickButton1"
-                android:layout_marginRight="10dp"
-                android:background="@color/buttonColor"
-                android:text="50"
-                android:textColor="@color/textColor"
-                android:textSize="20sp"
-                app:layout_columnWeight="1" />
-
-            <Button
-                android:id="@+id/quickButton2"
-                android:layout_marginLeft="10dp"
-                android:background="@color/buttonColor"
-                android:text="100"
-                android:textColor="@color/textColor"
-                android:textSize="20sp"
-                app:layout_columnWeight="1" />
-
-            <Button
-                android:id="@+id/quickButton3"
-                android:layout_marginRight="10dp"
-                android:layout_marginTop="30dp"
-                android:background="@color/buttonColor"
-                android:text="500"
-                android:textColor="@color/textColor"
-                android:textSize="20sp"
-                app:layout_columnWeight="1" />
-
-            <Button
-                android:id="@+id/quickButton4"
-                android:layout_marginLeft="10dp"
-                android:layout_marginTop="30dp"
-                android:background="@color/buttonColor"
-                android:text="1000"
-                android:textColor="@color/textColor"
-                android:textSize="20sp"
-                app:layout_columnWeight="1" />
-
-            <Button
-                android:id="@+id/quickButton5"
-                android:layout_marginRight="10dp"
-                android:layout_marginTop="30dp"
-                android:background="@color/buttonColor"
-                android:text="5000"
-                android:textColor="@color/textColor"
-                android:textSize="20sp"
-                app:layout_columnWeight="1" />
-
-            <Button
-                android:id="@+id/quickButton6"
-                android:layout_marginLeft="10dp"
-                android:layout_marginTop="30dp"
-                android:background="@color/buttonColor"
-                android:text="10000"
-                android:textColor="@color/textColor"
-                android:textSize="20sp"
-                app:layout_columnWeight="1" />
-
-            <Button
-                android:id="@+id/quickButton7"
-                android:layout_marginRight="10dp"
-                android:layout_marginTop="30dp"
-                android:background="@color/buttonColor"
-                android:text="15000"
-                android:textColor="@color/textColor"
-                android:textSize="20sp"
-                app:layout_columnWeight="1" />
-
-            <Button
-                android:id="@+id/quickButton8"
-                android:layout_marginLeft="10dp"
-                android:layout_marginTop="30dp"
-                android:background="@color/buttonColor"
-                android:text="50000"
-                android:textColor="@color/textColor"
-                android:textSize="20sp"
-                app:layout_columnWeight="1" />
-
-        </android.support.v7.widget.GridLayout>
-
-        <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="30dp"
-            android:layout_marginRight="30dp"
-            android:layout_marginTop="30dp"
-            android:gravity="center">
-
-            <EditText
-                android:id="@+id/total"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_alignBottom="@+id/addButton"
-                android:layout_alignTop="@+id/addButton"
-                android:layout_toLeftOf="@+id/addButton"
-                android:layout_weight="4"
-                android:background="@drawable/edit_text_box"
-                android:hint="Total"
-                android:inputType="number"
-                android:textColor="@color/buttonColor"
-                android:paddingLeft="10dp"
-                android:textColorHint="@color/buttonColor" />
-
-            <Button
-                android:id="@+id/addButton"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignParentEnd="true"
-                android:layout_alignParentRight="true"
-                android:layout_weight="1"
-                android:background="@color/buttonColor"
-                android:text="ADD"
-                android:textColor="@color/textColor" />
-
-        </RelativeLayout>
-    </LinearLayout>
-    </LinearLayout>
 </LinearLayout>
