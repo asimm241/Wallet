@@ -22,7 +22,7 @@
             android:focusedByDefault="false"
             android:gravity="center"
             android:hint="INCOME"
-            android:inputType="numberDecimal"
+            android:inputType="number"
             android:padding="50dp"
             android:textColor="@color/buttonColor"
             android:textSize="30dp" />

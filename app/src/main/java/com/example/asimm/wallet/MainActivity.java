@@ -42,6 +42,9 @@ public class MainActivity extends AppCompatActivity {
     @BindView(R.id.view_pager)
     ViewPager pager;
 
+    @BindView(R.id.tvIncome)
+    TextView incomeTextView;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -55,10 +58,10 @@ public class MainActivity extends AppCompatActivity {
 
         tabLayout.getTabAt(1).select();
 
+        incomeTextView.setText(Long.toString(PreferencesUtilities.readIncome()));
+
 
     }
-
-
 
 
     @Override

@@ -6,7 +6,6 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v7.app.AlertDialog;
-import android.support.v7.widget.Toolbar;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -25,6 +24,8 @@ import butterknife.Unbinder;
 
 public class HomeFragment extends Fragment {
 
+
+    Unbinder unbinder;
 
     @BindView(R.id.total)
     EditText mTotalEditText;
@@ -56,13 +57,8 @@ public class HomeFragment extends Fragment {
     @BindView(R.id.quickButton8)
     Button mQuickButton8;
 
-    @BindView(R.id.toolbar)
-    Toolbar toolbar;
 
-    @BindView(R.id.income)
     TextView incomeTextView;
-
-    Unbinder unbinder;
 
 
     final int buttonValues[] = {50, 100, 500, 1000, 5000, 10000, 15000, 50000};
@@ -72,15 +68,33 @@ public class HomeFragment extends Fragment {
         // Required empty public constructor
     }
 
+
+    @Override
+    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+                             Bundle savedInstanceState) {
+        // Inflate the layout for this fragment
+        View view = inflater.inflate(R.layout.fragment_home, container, false);
+        unbinder = ButterKnife.bind(this, view);
+        incomeTextView = getActivity().findViewById(R.id.tvIncome);
+
+        return view;
+    }
+
+    @Override
+    public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+    }
+
+
     private void setIncome() {
         String text = mTotalEditText.getText().toString();
         if (text.equals("") || text == null) {
-            Toast.makeText(getContext(), "No Spending Entered", Toast.LENGTH_LONG).show();
+            Toast.makeText(getActivity(), "No Spending Entered", Toast.LENGTH_LONG).show();
             return;
         } else {
-            float expense = Float.parseFloat(text);
-            double prevIncome = PreferencesUtilities.readIncome();
-            final double newIncome = prevIncome - expense;
+            long expense = Integer.parseInt(text);
+            long prevIncome = PreferencesUtilities.readIncome();
+            final long newIncome = prevIncome - expense;
             if (newIncome < 0) {
                 AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
                 builder.setMessage("Your Income is less than you spending. \n are you sure you want to spend")
@@ -88,13 +102,13 @@ public class HomeFragment extends Fragment {
                             @Override
                             public void onClick(DialogInterface dialog, int which) {
                                 PreferencesUtilities.writeIncome(newIncome);
-                                incomeTextView.setText(Double.toString(newIncome));
+                                incomeTextView.setText(Long.toString(newIncome));
                                 mTotalEditText.setText("");
                             }
                         }).setNegativeButton("NO", null).create().show();
             } else {
                 PreferencesUtilities.writeIncome(newIncome);
-                incomeTextView.setText(Double.toString(newIncome));
+                incomeTextView.setText(Long.toString(newIncome));
                 mTotalEditText.setText("");
 
             }
@@ -102,22 +116,6 @@ public class HomeFragment extends Fragment {
 
     }
 
-    @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_home, container, false);
-    }
-
-    @Override
-    public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
-        super.onViewCreated(view, savedInstanceState);
-        setupViews();
-    }
-
-    private void setupViews() {
-        unbinder = ButterKnife.bind(getActivity());
-    }
 
     @OnClick({R.id.addButton, R.id.quickButton1, R.id.quickButton2, R.id.quickButton3, R.id.quickButton4, R.id.quickButton5, R.id.quickButton6, R.id.quickButton7, R.id.quickButton8})
     public void onClick(View view) {
@@ -155,17 +153,17 @@ public class HomeFragment extends Fragment {
         }
     }
 
-    private void addTotal(float val) {
+    private void addTotal(int val) {
         String text = mTotalEditText.getText().toString();
-        float newTotal;
+        int newTotal;
         if (text.equals("") || text == null) {
             newTotal = val;
         } else {
-            float existingToatl = Float.parseFloat(text);
+            int existingToatl = Integer.parseInt(text);
 
             newTotal = existingToatl + val;
         }
-        mTotalEditText.setText(Float.toString(newTotal));
+        mTotalEditText.setText(Integer.toString(newTotal));
     }
 
     @Override
