@@ -24,6 +24,7 @@
                 android:layout_alignParentLeft="true"
                 android:layout_alignParentStart="true"
                 android:layout_gravity="center|clip_vertical"
+                android:fontFamily="sans-serif"
                 android:gravity="center"
                 android:text="Wallet"
                 android:textColor="@color/textColor"
@@ -37,6 +38,7 @@
                 android:layout_alignParentRight="true"
                 android:layout_gravity="center|clip_vertical"
                 android:layout_marginRight="20dp"
+                android:fontFamily="sans-serif"
                 android:gravity="center"
                 android:text="0"
                 android:textColor="@color/textColor" />
@@ -47,6 +49,7 @@
                 android:layout_height="match_parent"
                 android:layout_gravity="center|clip_vertical"
                 android:layout_toLeftOf="@id/tvIncome"
+                android:fontFamily="sans-serif"
                 android:gravity="center"
                 android:text="Rs "
                 android:textColor="@color/textColor" />

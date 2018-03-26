@@ -97,7 +97,7 @@ public class HomeFragment extends Fragment {
             final long newIncome = prevIncome - expense;
             if (newIncome < 0) {
                 AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
-                builder.setMessage("Your Income is less than you spending. \n are you sure you want to spend")
+                builder.setMessage("There is not enough money in your wallet. \nAre you sure you want to spend?")
                         .setPositiveButton("YES", new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialog, int which) {
