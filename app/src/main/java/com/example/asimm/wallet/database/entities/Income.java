@@ -10,7 +10,7 @@ import android.arch.persistence.room.PrimaryKey;
  */
 
 @Entity(tableName = "income")
-public class Income {
+public class Income extends BaseEntity{
 
     @Ignore
     public static final String TABLE_NAME = "income";

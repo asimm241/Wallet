@@ -10,7 +10,7 @@ import android.arch.persistence.room.PrimaryKey;
  */
 
 @Entity(tableName = "spending")
-public class Spending {
+public class Spending extends BaseEntity{
 
 
     @Ignore
