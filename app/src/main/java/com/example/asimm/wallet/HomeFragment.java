@@ -9,12 +9,18 @@ import android.support.v7.app.AlertDialog;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.asimm.wallet.Utilities.PreferencesUtilities;
+import com.example.asimm.wallet.database.SpendingsFetcher;
+import com.example.asimm.wallet.database.entities.Spending;
+
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -107,9 +113,7 @@ public class HomeFragment extends Fragment {
                             }
                         }).setNegativeButton("NO", null).create().show();
             } else {
-                PreferencesUtilities.writeIncome(newIncome);
-                incomeTextView.setText(Long.toString(newIncome));
-                mTotalEditText.setText("");
+                showCategoryList(newIncome);
 
             }
         }
@@ -117,7 +121,9 @@ public class HomeFragment extends Fragment {
     }
 
 
-    @OnClick({R.id.addButton, R.id.quickButton1, R.id.quickButton2, R.id.quickButton3, R.id.quickButton4, R.id.quickButton5, R.id.quickButton6, R.id.quickButton7, R.id.quickButton8})
+    @OnClick({R.id.addButton, R.id.quickButton1, R.id.quickButton2, R.id.quickButton3,
+            R.id.quickButton4, R.id.quickButton5, R.id.quickButton6, R.id.quickButton7,
+            R.id.quickButton8})
     public void onClick(View view) {
 
         switch (view.getId()) {
@@ -151,6 +157,54 @@ public class HomeFragment extends Fragment {
             default:
                 break;
         }
+    }
+
+    private void showCategoryList(final long newIncome) {
+        AlertDialog.Builder builderSingle = new AlertDialog.Builder(getActivity());
+        builderSingle.setIcon(R.drawable.avd_show_password_1);
+        builderSingle.setTitle("Select One Name:-");
+
+        final ArrayAdapter<String> arrayAdapter = new ArrayAdapter<String>(getActivity(), android.R.layout.select_dialog_singlechoice);
+        arrayAdapter.add("Food");
+        arrayAdapter.add("Shoping");
+        arrayAdapter.add("Traveling");
+        arrayAdapter.add("Utilities");
+        arrayAdapter.add("Other");
+
+        builderSingle.setNegativeButton("cancel", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                dialog.dismiss();
+            }
+        });
+
+        builderSingle.setAdapter(arrayAdapter, new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+
+                String categoryName = arrayAdapter.getItem(which);
+                PreferencesUtilities.writeIncome(newIncome);
+                incomeTextView.setText(Long.toString(newIncome));
+                mTotalEditText.setText("");
+
+                Spending spending = new Spending();
+                spending.setCategory(categoryName);
+                spending.setAmount(newIncome);
+                spending.setDate(getCurrentDate());
+
+                SpendingsFetcher expenseFetcher = new SpendingsFetcher();
+                expenseFetcher.insertSpendings(spending);
+
+            }
+        });
+        builderSingle.show();
+
+    }
+
+    private String getCurrentDate() {
+        Calendar calendar = Calendar.getInstance();
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd kk:mm");
+        return simpleDateFormat.format(calendar.getTime());
     }
 
     private void addTotal(int val) {
