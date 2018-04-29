@@ -65,7 +65,7 @@ public class AddIncomeFragment extends Fragment {
 
                         PreferencesUtilities.writeIncome(result);
 
-                        incomeTextView.setText(Long.toString(result));
+                        incomeTextView.setText("RS " + Long.toString(result));
                         addIncomeEditText.setText("");
                         Toast.makeText(getContext(), "Total Income:" + result, Toast.LENGTH_LONG).show();
                     }

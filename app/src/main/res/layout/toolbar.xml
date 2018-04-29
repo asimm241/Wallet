@@ -40,19 +40,14 @@
                 android:layout_marginRight="20dp"
                 android:fontFamily="sans-serif"
                 android:gravity="center"
-                android:text="0"
-                android:textColor="@color/textColor" />
+                android:text="RS 0"
+                android:background="@drawable/income_bg"
+                android:textColor="@color/buttonColor"
+                android:layout_marginTop="@dimen/_10sdp"
+                android:layout_marginBottom="@dimen/_10sdp"
+                android:paddingLeft="@dimen/_5sdp"
+                android:paddingRight="@dimen/_5sdp"/>
 
-            <TextView
-                android:id="@+id/lable"
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:layout_gravity="center|clip_vertical"
-                android:layout_toLeftOf="@id/tvIncome"
-                android:fontFamily="sans-serif"
-                android:gravity="center"
-                android:text="Rs "
-                android:textColor="@color/textColor" />
 
         </RelativeLayout>
 

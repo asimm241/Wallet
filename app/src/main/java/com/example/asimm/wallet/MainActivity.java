@@ -45,7 +45,7 @@ public class MainActivity extends AppCompatActivity {
 
         tabLayout.getTabAt(1).select();
 
-        incomeTextView.setText(Long.toString(PreferencesUtilities.readIncome()));
+        incomeTextView.setText("RS " + Long.toString(PreferencesUtilities.readIncome()));
 
 
     }
