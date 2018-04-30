@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/relative_layout"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_below="@+id/start_date_text"
+    android:orientation="horizontal"
+    android:weightSum="3">
+
+    <View
+        android:layout_width="0sp"
+        android:layout_height="@dimen/_30sdp"
+        android:layout_weight="0.125" />
+
+    <TextView
+        android:id="@+id/date_rowview"
+        android:layout_width="0sp"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_weight=".92"
+        android:gravity="center"
+
+        />
+
+    <TextView
+        android:id="@+id/amount_rowview"
+        android:layout_width="0sp"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_weight=".92"
+        android:gravity="center"
+        />
+
+    <TextView
+        android:id="@+id/category_rowview"
+        android:layout_width="0sp"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_weight=".92"
+        android:gravity="center"
+         />
+
+    <View
+        android:layout_width="0sp"
+        android:layout_height="@dimen/_30sdp"
+        android:layout_weight="0.125" />
+
+</LinearLayout>

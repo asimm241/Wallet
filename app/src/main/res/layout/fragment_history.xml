@@ -1,13 +1,97 @@
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context="com.example.asimm.wallet.HistoryFragment">
 
-    <!-- TODO: Update blank fragment layout -->
     <TextView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="@string/hello_blank_fragment" />
+        android:id="@+id/start_date_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/_30sdp"
+        android:layout_marginStart="@dimen/_30sdp"
+        android:layout_marginTop="@dimen/_15sdp"
+        android:background="@drawable/button_border"
+        android:padding="@dimen/_7sdp"
+        android:text="Start Date"
+        android:textColor="@color/textColor"
+        android:textStyle="bold" />
 
-</FrameLayout>
+    <TextView
+        android:id="@+id/end_date_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentRight="true"
+        android:layout_marginEnd="@dimen/_30sdp"
+        android:layout_marginRight="@dimen/_30sdp"
+        android:layout_marginTop="@dimen/_15sdp"
+        android:background="@drawable/button_border"
+        android:padding="@dimen/_7sdp"
+        android:text="End Date"
+        android:textColor="@color/textColor"
+        android:textStyle="bold" />
+
+    <LinearLayout
+        android:id="@+id/relative_layout"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/_30sdp"
+        android:layout_below="@+id/start_date_text"
+        android:layout_marginTop="@dimen/_15sdp"
+        android:background="@color/buttonColor"
+        android:orientation="horizontal"
+        android:weightSum="3">
+
+        <View
+            android:layout_width="0sp"
+            android:layout_height="wrap_content"
+            android:layout_weight="0.125" />
+
+        <TextView
+            android:layout_width="0sp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_weight=".92"
+            android:gravity="center"
+            android:text="DATE"
+            android:textColor="@color/textColor"
+            android:textStyle="bold" />
+
+        <TextView
+            android:layout_width="0sp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_weight=".92"
+            android:gravity="center"
+            android:text="AMOUNT"
+            android:textColor="@color/textColor"
+            android:textStyle="bold" />
+
+        <TextView
+            android:layout_width="0sp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_weight=".92"
+            android:gravity="center"
+            android:text="CATEGORY"
+            android:textColor="@color/textColor"
+            android:textStyle="bold" />
+
+        <View
+            android:layout_width="0sp"
+            android:layout_height="wrap_content"
+            android:layout_weight="0.125" />
+
+    </LinearLayout>
+
+
+    <android.support.v7.widget.RecyclerView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/history_recyclerview"
+        android:layout_below="@+id/relative_layout"
+        android:layout_marginTop="@dimen/_5sdp">
+
+    </android.support.v7.widget.RecyclerView>
+
+</RelativeLayout>
