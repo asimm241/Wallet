@@ -2,6 +2,9 @@ package com.example.asimm.wallet;
 
 
 import android.app.DatePickerDialog;
+import android.arch.lifecycle.LifecycleFragment;
+import android.arch.lifecycle.LiveData;
+import android.arch.lifecycle.Observer;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -14,22 +17,24 @@ import android.widget.DatePicker;
 import android.widget.TextView;
 
 import com.example.asimm.wallet.Utilities.FunctionUtilities;
+import com.example.asimm.wallet.database.SpendingsFetcher;
 import com.example.asimm.wallet.database.entities.Spending;
 
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.List;
 
 
 /**
  * A simple {@link Fragment} subclass.
  */
-public class HistoryFragment extends Fragment {
+public class HistoryFragment extends LifecycleFragment {
 
     TextView startDateText;
     TextView endDateText;
     RecyclerView recyclerView;
     RecyclerViewAdapter adapter;
-    ArrayList<Spending> spendings;
+    List<Spending> spendings;
 
     int sYear, sMonth, sDay, eYear, eMonth, eDay;
 
@@ -57,7 +62,7 @@ public class HistoryFragment extends Fragment {
         spendings = new ArrayList<>();
         for (int i = 0; i < 20; i++) {
             Spending spending = new Spending();
-            spending.setAmount(10+i);
+            spending.setAmount(10 + i);
             spending.setCategory("Food");
             spending.setDate("15-03-2017");
             spendings.add(spending);
@@ -87,6 +92,19 @@ public class HistoryFragment extends Fragment {
             @Override
             public void onClick(View view) {
                 showEndDatePicker();
+            }
+        });
+
+        final SpendingsFetcher spendingsFetcher = new SpendingsFetcher();
+        LiveData<List<Spending>> spendingsLiveData = spendingsFetcher.getAllSpendings();
+        spendingsLiveData.observe(this, new Observer<List<Spending>>() {
+            @Override
+            public void onChanged(@Nullable List<Spending> spendingsList) {
+                if (spendingsList != null) {
+                    spendings.clear();
+                    spendings.addAll(spendingsList);
+                    adapter.notifyDataSetChanged();
+                }
             }
         });
 
@@ -149,7 +167,7 @@ public class HistoryFragment extends Fragment {
 
         @Override
         public int getItemCount() {
-            return 20;
+            return spendings.size();
         }
     }
 

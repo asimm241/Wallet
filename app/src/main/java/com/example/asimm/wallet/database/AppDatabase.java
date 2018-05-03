@@ -13,7 +13,7 @@ import com.example.asimm.wallet.database.entities.Spending;
  * Created by asimm on 2/1/2018.
  */
 
-@Database(entities = {Income.class, Spending.class}, version = 1)
+@Database(entities = {Income.class, Spending.class}, version = 1,exportSchema = false)
 public abstract class AppDatabase extends RoomDatabase {
 
     public abstract IncomeDoa getIncomeDao();
