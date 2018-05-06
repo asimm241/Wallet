@@ -1,6 +1,7 @@
 package com.example.asimm.wallet.database;
 
 import com.example.asimm.wallet.App.App;
+import com.example.asimm.wallet.database.AsyncTasks.CRUDAsyncTask;
 import com.example.asimm.wallet.database.dao.IncomeDoa;
 import com.example.asimm.wallet.database.entities.Income;
 
@@ -15,7 +16,8 @@ public class IncomeFetcher {
         incomeDoa = App.getAppDatabase().getIncomeDao();
     }
 
-    public void InsertIncome(Income... incomes){
-        incomeDoa.insert(incomes);
+    public void insertIncome(Income... incomes) {
+        CRUDAsyncTask<Income> crudAsyncTask = new CRUDAsyncTask<Income>(incomeDoa, null, incomes);
+        crudAsyncTask.execute(CRUDAsyncTask.INSERT);
     }
 }

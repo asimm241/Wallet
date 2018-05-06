@@ -1,10 +1,10 @@
 package com.example.asimm.wallet;
 
 
+import android.arch.lifecycle.LifecycleFragment;
 import android.content.DialogInterface;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
-import android.support.v4.app.Fragment;
 import android.support.v7.app.AlertDialog;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -15,13 +15,11 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.asimm.wallet.Utilities.FunctionUtilities;
 import com.example.asimm.wallet.Utilities.PreferencesUtilities;
 import com.example.asimm.wallet.Utilities.ViewsUtilities;
 import com.example.asimm.wallet.database.SpendingsFetcher;
 import com.example.asimm.wallet.database.entities.Spending;
-
-import java.text.SimpleDateFormat;
-import java.util.Calendar;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -29,7 +27,7 @@ import butterknife.OnClick;
 import butterknife.Unbinder;
 
 
-public class HomeFragment extends Fragment {
+public class HomeFragment extends LifecycleFragment {
 
 
     Unbinder unbinder;
@@ -98,7 +96,7 @@ public class HomeFragment extends Fragment {
             Toast.makeText(getActivity(), "No Spending Entered", Toast.LENGTH_LONG).show();
             return;
         } else {
-            long expense = Integer.parseInt(text);
+            final int expense = Integer.parseInt(text);
             long prevIncome = PreferencesUtilities.readIncome();
             final long newIncome = prevIncome - expense;
             if (newIncome < 0) {
@@ -115,11 +113,11 @@ public class HomeFragment extends Fragment {
                 ViewsUtilities.showAlertDialog(getActivity(), "There is not enough money in your wallet. \nAre you sure you want to spend?", new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
-                        showCategoryList(newIncome);
+                        showCategoryList(newIncome, expense);
                     }
                 });
             } else {
-                showCategoryList(newIncome);
+                showCategoryList(newIncome, expense);
             }
         }
 
@@ -164,7 +162,7 @@ public class HomeFragment extends Fragment {
         }
     }
 
-    private void showCategoryList(final long newIncome) {
+    private void showCategoryList(final long newIncome, final int expense) {
         AlertDialog.Builder builderSingle = new AlertDialog.Builder(getActivity());
         builderSingle.setIcon(R.drawable.avd_show_password_1);
         builderSingle.setTitle("Select Category");
@@ -189,7 +187,12 @@ public class HomeFragment extends Fragment {
                 ViewsUtilities.showAlertDialog(getActivity(), "Add Rs " + mTotalEditText.getText().toString() + " in " + arrayAdapter.getItem(which) + " category?", new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
-                        addExpenseInDb(which, arrayAdapter, newIncome);
+
+                        String categoryName = arrayAdapter.getItem(which);
+                        PreferencesUtilities.writeIncome(newIncome);
+                        incomeTextView.setText("RS " + Long.toString(newIncome));
+                        mTotalEditText.setText("");
+                        addExpenseInDb(expense, categoryName);
                     }
                 });
 
@@ -200,27 +203,19 @@ public class HomeFragment extends Fragment {
 
     }
 
-    private void addExpenseInDb(int which, ArrayAdapter<String> arrayAdapter, long newIncome) {
-        String categoryName = arrayAdapter.getItem(which);
-        PreferencesUtilities.writeIncome(newIncome);
-        incomeTextView.setText("RS " + Long.toString(newIncome));
-        mTotalEditText.setText("");
+    private void addExpenseInDb(int expense, String categoryName) {
+        ;
 
         Spending spending = new Spending();
         spending.setCategory(categoryName);
-        spending.setAmount(newIncome);
-        spending.setDate(getCurrentDate());
+        spending.setAmount(expense);
+        spending.setDate(FunctionUtilities.getCurrentTimeStamp());
 
         SpendingsFetcher expenseFetcher = new SpendingsFetcher();
         expenseFetcher.insertSpendings(spending);
         ViewsUtilities.showToast(getActivity(), "Expense Added");
     }
 
-    private String getCurrentDate() {
-        Calendar calendar = Calendar.getInstance();
-        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd kk:mm");
-        return simpleDateFormat.format(calendar.getTime());
-    }
 
     private void addTotal(int val) {
         String text = mTotalEditText.getText().toString();

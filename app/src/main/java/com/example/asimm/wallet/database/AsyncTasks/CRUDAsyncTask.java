@@ -34,20 +34,20 @@ public class CRUDAsyncTask<T> extends AsyncTask<Integer, Integer, Boolean> {
 
     private CRUDAsyncTaskCallback crudAsyncTaskCallback;
 
-    private MutableLiveData<Boolean> crudAsyncTaskLiveData;
+//    private MutableLiveData<Boolean> crudAsyncTaskLiveData;
 
     public CRUDAsyncTask(BaseDao genericDao, CRUDAsyncTaskCallback crudAsyncTaskCallback, T... entities) {
         this.baseDao = genericDao;
         this.entities = entities;
         this.crudAsyncTaskCallback = crudAsyncTaskCallback;
-        this.crudAsyncTaskLiveData = new MutableLiveData<>();
+//        this.crudAsyncTaskLiveData = new MutableLiveData<>();
     }
 
     public CRUDAsyncTask(BaseDao genericDao, CRUDAsyncTaskCallback crudAsyncTaskCallback, List<T> entities) {
         this.baseDao = genericDao;
         this.entities = (T[]) entities.toArray();
         this.crudAsyncTaskCallback = crudAsyncTaskCallback;
-        this.crudAsyncTaskLiveData = new MutableLiveData<>();
+//        this.crudAsyncTaskLiveData = new MutableLiveData<>();
     }
 
 
@@ -89,9 +89,9 @@ public class CRUDAsyncTask<T> extends AsyncTask<Integer, Integer, Boolean> {
         return false;
     }
 
-    public LiveData<Boolean> getAsyncTaskLiveData() {
-        return this.crudAsyncTaskLiveData;
-    }
+//    public LiveData<Boolean> getAsyncTaskLiveData() {
+//        return this.crudAsyncTaskLiveData;
+//    }
 
     @Override
     public void onProgressUpdate(Integer... progresses) {
@@ -110,9 +110,9 @@ public class CRUDAsyncTask<T> extends AsyncTask<Integer, Integer, Boolean> {
         if (this.crudAsyncTaskCallback != null) {
             this.crudAsyncTaskCallback.onPostExecute(result);
         }
-        if (this.crudAsyncTaskLiveData != null) {
-            this.crudAsyncTaskLiveData.setValue(result);
-        }
+//        if (this.crudAsyncTaskLiveData != null) {
+//            this.crudAsyncTaskLiveData.setValue(result);
+//        }
 
     }
 

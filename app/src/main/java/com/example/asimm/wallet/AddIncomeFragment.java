@@ -13,7 +13,10 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.asimm.wallet.Utilities.FunctionUtilities;
 import com.example.asimm.wallet.Utilities.PreferencesUtilities;
+import com.example.asimm.wallet.database.IncomeFetcher;
+import com.example.asimm.wallet.database.entities.Income;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -67,11 +70,21 @@ public class AddIncomeFragment extends Fragment {
 
                         incomeTextView.setText("RS " + Long.toString(result));
                         addIncomeEditText.setText("");
+                        addIncomeInDb(enteredIncome);
                         Toast.makeText(getContext(), "Total Income:" + result, Toast.LENGTH_LONG).show();
                     }
                 }).setNegativeButton("NO", null).create().show();
 
 
     }
+
+    private void addIncomeInDb(long result) {
+        Income income = new Income();
+        income.setAmount(result);
+        income.setDate(FunctionUtilities.getCurrentTimeStamp());
+        IncomeFetcher incomeFetcher = new IncomeFetcher();
+        incomeFetcher.insertIncome(income);
+    }
+
 
 }
