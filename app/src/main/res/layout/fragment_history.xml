@@ -4,6 +4,14 @@
     android:layout_height="match_parent"
     tools:context="com.example.asimm.wallet.HistoryFragment">
 
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/arrow_ico"
+        android:layout_marginTop="@dimen/_15sdp"
+        android:layout_centerHorizontal="true"
+        />
+
     <TextView
         android:id="@+id/start_date_text"
         android:layout_width="wrap_content"
@@ -38,7 +46,7 @@
         android:layout_height="@dimen/_30sdp"
         android:layout_below="@+id/start_date_text"
         android:layout_marginTop="@dimen/_15sdp"
-        android:background="@color/buttonColor"
+        android:background="@drawable/button_border"
         android:orientation="horizontal"
         android:weightSum="3">
 
