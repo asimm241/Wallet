@@ -24,6 +24,8 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
 
+import butterknife.internal.Utils;
+
 
 /**
  * A simple {@link Fragment} subclass.
@@ -148,6 +150,31 @@ public class HistoryFragment extends LifecycleFragment {
             eMonth = month;
             eDay = dayOfMonth;
         }
+
+
+        Calendar startCalendar = Calendar.getInstance();
+        startCalendar.set(sYear, sMonth, sDay, 0, 0, 0);
+
+        Calendar endCalendar = Calendar.getInstance();
+
+        if (eYear > 0) {
+            endCalendar.set(eYear, eMonth, eDay, 0, 0, 0);
+        }
+
+        SpendingsFetcher spendingsFetcher = new SpendingsFetcher();
+
+        LiveData<List<Spending>> spendingsLiveData = spendingsFetcher.getPartialSpendings(FunctionUtilities.getTimeStamp(startCalendar)
+                , FunctionUtilities.getTimeStamp(endCalendar));
+        spendingsLiveData.observe(this, new Observer<List<Spending>>() {
+            @Override
+            public void onChanged(@Nullable List<Spending> spendingsList) {
+                if (spendingsList != null) {
+                    spendings.clear();
+                    spendings.addAll(spendingsList);
+                    adapter.notifyDataSetChanged();
+                }
+            }
+        });
     }
 
     public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewHolder> {
