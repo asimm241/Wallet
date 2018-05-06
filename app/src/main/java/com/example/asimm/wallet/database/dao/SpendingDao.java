@@ -16,9 +16,12 @@ import java.util.List;
 public interface SpendingDao extends BaseDao<Spending> {
 
     @Query("SELECT * FROM " + Spending.TABLE_NAME + " WHERE " + Spending.COLUMN_DATE + " >=:start AND " +
-            Spending.COLUMN_DATE + "<=:end")
+            Spending.COLUMN_DATE + "<=:end ORDER BY " + Spending.COLUMN_DATE + " DESC ")
     LiveData<List<Spending>> getPartialSpendings(String start, String end);
 
-    @Query("SELECT * FROM " + Spending.TABLE_NAME)
+    @Query("SELECT * FROM " + Spending.TABLE_NAME + " ORDER BY " + Spending.COLUMN_DATE + " DESC " +
+            "" +
+            "" +
+            "")
     LiveData<List<Spending>> getAllSpendings();
 }
