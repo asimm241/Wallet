@@ -22,6 +22,11 @@ public class FunctionUtilities {
         return simpleDateFormat.format(calendar.getTime());
     }
 
+    public static String getTimeStamp(Calendar calendar) {
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd kk:mm");
+        return simpleDateFormat.format(calendar.getTime());
+    }
+
     public static String getDate(dateEnum d, Date date) {
         SimpleDateFormat dateFormat;
         switch (d) {
