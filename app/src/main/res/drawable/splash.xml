@@ -3,7 +3,7 @@
 <layer-list xmlns:android="http://schemas.android.com/apk/res/android">
     <item android:drawable="@color/textColor"/>
     <item>
-        <bitmap android:src="@drawable/ic_wallet"
+        <bitmap android:src="@drawable/logo1"
             android:gravity="center"/>
     </item>
 

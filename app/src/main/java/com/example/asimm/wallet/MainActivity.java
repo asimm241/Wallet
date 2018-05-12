@@ -82,13 +82,14 @@ public class MainActivity extends AppCompatActivity {
             return 3;
         }
 
+
         @Override
         public CharSequence getPageTitle(int position) {
             switch (position) {
                 case 0:
                     return "Add Income";
                 case 1:
-                    return "Home";
+                    return "Add Expense";
                 case 2:
                     return "History";
                 default:
