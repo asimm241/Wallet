@@ -163,7 +163,7 @@ public class HomeFragment extends LifecycleFragment {
     }
 
     private void showCategoryList(final long newIncome, final int expense) {
-        AlertDialog.Builder builderSingle = new AlertDialog.Builder(getActivity());
+        AlertDialog.Builder builderSingle = new AlertDialog.Builder(getActivity(),R.style.DialogTheme);
         builderSingle.setIcon(R.drawable.avd_show_password_1);
         builderSingle.setTitle("Select Category");
 
