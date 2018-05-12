@@ -55,7 +55,7 @@ public class AddIncomeFragment extends Fragment {
         return view;
 
     }
-    
+
     @OnClick(R.id.button_add_income)
     public void onClickAddIncome(View view) {
         final long existingIncome = PreferencesUtilities.readIncome();
