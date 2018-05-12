@@ -4,6 +4,7 @@ import android.arch.lifecycle.LiveData;
 
 import com.example.asimm.wallet.App.App;
 import com.example.asimm.wallet.database.AsyncTasks.CRUDAsyncTask;
+import com.example.asimm.wallet.database.AsyncTasks.DeleteAllFromTables;
 import com.example.asimm.wallet.database.dao.SpendingDao;
 import com.example.asimm.wallet.database.entities.Spending;
 
@@ -13,10 +14,10 @@ import java.util.List;
  * Created by asimm on 4/5/2018.
  */
 
-public class SpendingsFetcher {
+public class SpendingFetcher {
     SpendingDao spendingDao;
 
-    public SpendingsFetcher() {
+    public SpendingFetcher() {
         this.spendingDao = App.getAppDatabase().getSpendingDao();
     }
 
@@ -30,8 +31,13 @@ public class SpendingsFetcher {
         return spendingDao.getAllSpendings();
     }
 
-    public LiveData<List<Spending>> getPartialSpendings(String start,String end) {
+    public LiveData<List<Spending>> getPartialSpendings(long start, long end) {
 
         return spendingDao.getPartialSpendings(start, end);
+    }
+
+    public void deleteAllSpendings() {
+        DeleteAllFromTables deleteAllFromTables = new DeleteAllFromTables(spendingDao, null);
+        deleteAllFromTables.execute(DeleteAllFromTables.SPENDING);
     }
 }

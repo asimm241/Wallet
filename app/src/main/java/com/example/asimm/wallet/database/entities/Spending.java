@@ -26,7 +26,7 @@ public class Spending extends BaseEntity {
     public static final String COLUMN_CATEGORY = "category";
 
     @Ignore
-    public static final String COLUMN_DATE = "date";
+    public static final String COLUMN_EPOCH_TIME_STAMP = "epoch_time_stamp";
 
 
     @PrimaryKey(autoGenerate = true)
@@ -36,8 +36,16 @@ public class Spending extends BaseEntity {
     @ColumnInfo(name = COLUMN_AMOUNT)
     private double amount;
 
-    @ColumnInfo(name = COLUMN_DATE)
-    private String date;
+    @ColumnInfo(name = COLUMN_EPOCH_TIME_STAMP)
+    private long epochTimeStamp;
+
+    public long getEpochTimeStamp() {
+        return epochTimeStamp;
+    }
+
+    public void setEpochTimeStamp(long epochTimeStamp) {
+        this.epochTimeStamp = epochTimeStamp;
+    }
 
     @ColumnInfo(name = COLUMN_CATEGORY)
     private String category;
@@ -64,13 +72,5 @@ public class Spending extends BaseEntity {
 
     public void setAmount(double amount) {
         this.amount = amount;
-    }
-
-    public String getDate() {
-        return date;
-    }
-
-    public void setDate(String date) {
-        this.date = date;
     }
 }

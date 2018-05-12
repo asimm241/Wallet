@@ -15,10 +15,9 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.example.asimm.wallet.Utilities.FunctionUtilities;
 import com.example.asimm.wallet.Utilities.PreferencesUtilities;
 import com.example.asimm.wallet.Utilities.ViewsUtilities;
-import com.example.asimm.wallet.database.SpendingsFetcher;
+import com.example.asimm.wallet.database.SpendingFetcher;
 import com.example.asimm.wallet.database.entities.Spending;
 
 import butterknife.BindView;
@@ -163,7 +162,7 @@ public class HomeFragment extends LifecycleFragment {
     }
 
     private void showCategoryList(final long newIncome, final int expense) {
-        AlertDialog.Builder builderSingle = new AlertDialog.Builder(getActivity(),R.style.DialogTheme);
+        AlertDialog.Builder builderSingle = new AlertDialog.Builder(getActivity(), R.style.DialogTheme);
         builderSingle.setIcon(R.drawable.avd_show_password_1);
         builderSingle.setTitle("Select Category");
 
@@ -209,9 +208,9 @@ public class HomeFragment extends LifecycleFragment {
         Spending spending = new Spending();
         spending.setCategory(categoryName);
         spending.setAmount(expense);
-        spending.setDate(FunctionUtilities.getCurrentTimeStamp());
+        spending.setEpochTimeStamp(System.currentTimeMillis());
 
-        SpendingsFetcher expenseFetcher = new SpendingsFetcher();
+        SpendingFetcher expenseFetcher = new SpendingFetcher();
         expenseFetcher.insertSpendings(spending);
         ViewsUtilities.showToast(getActivity(), "Expense Added");
     }
@@ -220,7 +219,7 @@ public class HomeFragment extends LifecycleFragment {
     private void addTotal(int val) {
         String text = mTotalEditText.getText().toString();
         int newTotal;
-        if (text.equals("") || text == null) {
+        if (text == null || text.equals("")) {
             newTotal = val;
         } else {
             int existingToatl = Integer.parseInt(text);

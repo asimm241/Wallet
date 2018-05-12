@@ -13,10 +13,10 @@ import java.util.List;
  * Created by asimm on 4/5/2018.
  */
 
-public class CRUDAsyncTask<T> extends AsyncTask<Integer, Integer, Boolean> {
+public class DeleteAllFromTables extends AsyncTask<Integer, Integer, Boolean> {
 
 
-    public interface CRUDAsyncTaskCallback {
+    public interface DeleteAllFromTablesCallback {
         public void onPreExecute();
 
         public void onProgressUpdate(int progress);
@@ -24,28 +24,20 @@ public class CRUDAsyncTask<T> extends AsyncTask<Integer, Integer, Boolean> {
         public void onPostExecute(boolean done);
     }
 
-    public static final int INSERT = 1;
-    public static final int DELETE = 2;
-    public static final int UPDATE = 3;
+
+    public static final int SPENDING = 1;
+    public static final int INCOME = 2;
 
     private BaseDao baseDao;
 
-    private T[] entities;
 
-    private CRUDAsyncTaskCallback crudAsyncTaskCallback;
+    private DeleteAllFromTablesCallback crudAsyncTaskCallback;
 
 
-    public CRUDAsyncTask(BaseDao genericDao, CRUDAsyncTaskCallback crudAsyncTaskCallback, T... entities) {
-        this.baseDao = genericDao;
-        this.entities = entities;
-        this.crudAsyncTaskCallback = crudAsyncTaskCallback;
-    }
-
-    public CRUDAsyncTask(BaseDao genericDao, CRUDAsyncTaskCallback crudAsyncTaskCallback, List<T> entities) {
+    public DeleteAllFromTables(BaseDao genericDao, DeleteAllFromTablesCallback crudAsyncTaskCallback) {
         this.baseDao = genericDao;
         this.crudAsyncTaskCallback = crudAsyncTaskCallback;
     }
-
 
 
     @Override
@@ -59,30 +51,18 @@ public class CRUDAsyncTask<T> extends AsyncTask<Integer, Integer, Boolean> {
     @Override
     public Boolean doInBackground(Integer... operations) {
         if (this.baseDao != null) {
-            //getting operation
-            int operation = operations[0];
-            switch (operation) {
-                case INSERT: {
-                    this.baseDao.insert(this.entities);
+            switch (operations[0]) {
+                case SPENDING:
+                    baseDao.deleteAllSpendings();
                     return true;
-                }
 
-                case DELETE: {
-                    this.baseDao.delete(this.entities);
+                case INCOME:
+                    baseDao.deleteAllIncome();
                     return true;
-                }
 
-                case UPDATE: {
-                    this.baseDao.update(this.entities);
-                    return true;
-                }
-
-                default: {
-                    return false;
-                }
             }
-        }
-
+            return false;
+        }//getting operation
         return false;
     }
 
