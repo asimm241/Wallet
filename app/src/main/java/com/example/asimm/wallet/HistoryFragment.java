@@ -11,20 +11,22 @@ import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.DatePicker;
 import android.widget.TextView;
 
 import com.example.asimm.wallet.Utilities.FunctionUtilities;
+import com.example.asimm.wallet.Utilities.ViewsUtilities;
 import com.example.asimm.wallet.database.SpendingsFetcher;
 import com.example.asimm.wallet.database.entities.Spending;
 
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
-
-import butterknife.internal.Utils;
 
 
 /**
@@ -51,6 +53,7 @@ public class HistoryFragment extends LifecycleFragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
+        setHasOptionsMenu(true);
         return inflater.inflate(R.layout.fragment_history, container, false);
     }
 
@@ -175,6 +178,29 @@ public class HistoryFragment extends LifecycleFragment {
                 }
             }
         });
+    }
+
+    @Override
+    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
+        super.onCreateOptionsMenu(menu, inflater);
+        inflater.inflate(R.menu.history_menu, menu);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case R.id.delete_history_item:
+                ViewsUtilities.showAlertDialog(getActivity(), getString(R.string.delete_history_alert_message), new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        // delete history here
+                    }
+                });
+                break;
+            default:
+                break;
+        }
+        return super.onOptionsItemSelected(item);
     }
 
     public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewHolder> {

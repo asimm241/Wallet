@@ -12,4 +12,8 @@
         <item name="colorAccent">@color/buttonColor</item>
     </style>
 
+    <style name="SplashTheme" parent="@android:style/Theme.Holo.NoActionBar.Fullscreen">
+        <item name="android:windowBackground">@drawable/splash</item>
+    </style>
+
 </resources>

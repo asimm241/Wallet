@@ -6,6 +6,9 @@ import android.content.DialogInterface;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
@@ -47,11 +50,29 @@ public class AddIncomeFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_add_income, container, false);
         // Inflate the layout for this fragment
         unbinder = ButterKnife.bind(this, view);
-
+        setHasOptionsMenu(true);
         incomeTextView = getActivity().findViewById(R.id.tvIncome);
-
         return view;
 
+    }
+
+    @Override
+    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
+        super.onCreateOptionsMenu(menu, inflater);
+        inflater.inflate(R.menu.income_menu, menu);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId())
+        {
+            case R.id.income_history_item:
+
+                break;
+                default:
+                    break;
+        }
+        return super.onOptionsItemSelected(item);
     }
 
     @OnClick(R.id.button_add_income)
