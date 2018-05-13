@@ -189,6 +189,7 @@ public class HistoryFragment extends LifecycleFragment {
                         // delete history here
                         SpendingFetcher spendingFetcher = new SpendingFetcher();
                         spendingFetcher.deleteAllSpendings();
+                        ViewsUtilities.showToast(getActivity(), "History Deleted");
                     }
                 });
                 break;

@@ -183,13 +183,13 @@ public class HomeFragment extends LifecycleFragment {
         builderSingle.setAdapter(arrayAdapter, new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, final int which) {
-                ViewsUtilities.showAlertDialog(getActivity(), "Add Rs " + mTotalEditText.getText().toString() + " in " + arrayAdapter.getItem(which) + " category?", new View.OnClickListener() {
+                ViewsUtilities.showAlertDialog(getActivity(), "Add " + mTotalEditText.getText().toString() + " in " + arrayAdapter.getItem(which) + " category?", new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
 
                         String categoryName = arrayAdapter.getItem(which);
                         PreferencesUtilities.writeIncome(newIncome);
-                        incomeTextView.setText("RS " + Long.toString(newIncome));
+                        incomeTextView.setText("Amount: " + Long.toString(newIncome));
                         mTotalEditText.setText("");
                         addExpenseInDb(expense, categoryName);
                     }

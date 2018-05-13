@@ -1,20 +1,14 @@
 package com.example.asimm.wallet;
 
 
-import android.app.AlertDialog;
-import android.content.DialogInterface;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
-import android.view.Menu;
-import android.view.MenuInflater;
-import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.example.asimm.wallet.Utilities.FunctionUtilities;
 import com.example.asimm.wallet.Utilities.PreferencesUtilities;
@@ -58,22 +52,27 @@ public class AddIncomeFragment extends Fragment {
 
     @OnClick(R.id.button_add_income)
     public void onClickAddIncome(View view) {
-        final long existingIncome = PreferencesUtilities.readIncome();
-        final long enteredIncome = Long.parseLong(addIncomeEditText.getText().toString());
+        if (addIncomeEditText.getText().toString() != null && !addIncomeEditText.getText().toString().equals("")) {
+            final long existingIncome = PreferencesUtilities.readIncome();
+            final long enteredIncome = Long.parseLong(addIncomeEditText.getText().toString());
 
 
-        ViewsUtilities.showAlertDialog(getActivity(), "Add " + String.valueOf(enteredIncome) + " in your wallet?", new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                long result = existingIncome + enteredIncome;
+            ViewsUtilities.showAlertDialog(getActivity(), "Add " + String.valueOf(enteredIncome) + " in your wallet?", new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    long result = existingIncome + enteredIncome;
 
-                PreferencesUtilities.writeIncome(result);
+                    PreferencesUtilities.writeIncome(result);
 
-                incomeTextView.setText("RS " + Long.toString(result));
-                addIncomeEditText.setText("");
-                addIncomeInDb(enteredIncome);
-            }
-        });
+                    incomeTextView.setText("Amount: " + Long.toString(result));
+                    addIncomeEditText.setText("");
+                    addIncomeInDb(enteredIncome);
+                }
+            });
+        }
+        else {
+            ViewsUtilities.showToast(getActivity(), "Add an amount first");
+        }
 
     }
 

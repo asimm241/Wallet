@@ -47,7 +47,7 @@ public class MainActivity extends AppCompatActivity {
 
         tabLayout.getTabAt(1).select();
 
-        incomeTextView.setText("RS " + Long.toString(PreferencesUtilities.readIncome()));
+        incomeTextView.setText("Amount: " + Long.toString(PreferencesUtilities.readIncome()));
         incomeTextView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -55,7 +55,7 @@ public class MainActivity extends AppCompatActivity {
                     @Override
                     public void onClick(View view) {
                         PreferencesUtilities.writeIncome(0);
-                        incomeTextView.setText("RS " + Long.toString(PreferencesUtilities.readIncome()));
+                        incomeTextView.setText("Amount: " + Long.toString(PreferencesUtilities.readIncome()));
                         ViewsUtilities.showToast(MainActivity.this, "Youy wallet is empty now");
                     }
                 });
