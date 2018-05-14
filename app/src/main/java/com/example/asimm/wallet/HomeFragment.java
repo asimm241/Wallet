@@ -15,10 +15,9 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.example.asimm.wallet.Utilities.FunctionUtilities;
 import com.example.asimm.wallet.Utilities.PreferencesUtilities;
 import com.example.asimm.wallet.Utilities.ViewsUtilities;
-import com.example.asimm.wallet.database.SpendingsFetcher;
+import com.example.asimm.wallet.database.SpendingFetcher;
 import com.example.asimm.wallet.database.entities.Spending;
 
 import butterknife.BindView;
@@ -163,7 +162,7 @@ public class HomeFragment extends LifecycleFragment {
     }
 
     private void showCategoryList(final long newIncome, final int expense) {
-        AlertDialog.Builder builderSingle = new AlertDialog.Builder(getActivity());
+        AlertDialog.Builder builderSingle = new AlertDialog.Builder(getActivity(), R.style.DialogTheme);
         builderSingle.setIcon(R.drawable.avd_show_password_1);
         builderSingle.setTitle("Select Category");
 
@@ -184,13 +183,13 @@ public class HomeFragment extends LifecycleFragment {
         builderSingle.setAdapter(arrayAdapter, new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, final int which) {
-                ViewsUtilities.showAlertDialog(getActivity(), "Add Rs " + mTotalEditText.getText().toString() + " in " + arrayAdapter.getItem(which) + " category?", new View.OnClickListener() {
+                ViewsUtilities.showAlertDialog(getActivity(), "Add " + mTotalEditText.getText().toString() + " in " + arrayAdapter.getItem(which) + " category?", new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
 
                         String categoryName = arrayAdapter.getItem(which);
                         PreferencesUtilities.writeIncome(newIncome);
-                        incomeTextView.setText("RS " + Long.toString(newIncome));
+                        incomeTextView.setText("Amount: " + Long.toString(newIncome));
                         mTotalEditText.setText("");
                         addExpenseInDb(expense, categoryName);
                     }
@@ -209,9 +208,9 @@ public class HomeFragment extends LifecycleFragment {
         Spending spending = new Spending();
         spending.setCategory(categoryName);
         spending.setAmount(expense);
-        spending.setDate(FunctionUtilities.getCurrentTimeStamp());
+        spending.setEpochTimeStamp(System.currentTimeMillis());
 
-        SpendingsFetcher expenseFetcher = new SpendingsFetcher();
+        SpendingFetcher expenseFetcher = new SpendingFetcher();
         expenseFetcher.insertSpendings(spending);
         ViewsUtilities.showToast(getActivity(), "Expense Added");
     }
@@ -220,7 +219,7 @@ public class HomeFragment extends LifecycleFragment {
     private void addTotal(int val) {
         String text = mTotalEditText.getText().toString();
         int newTotal;
-        if (text.equals("") || text == null) {
+        if (text == null || text.equals("")) {
             newTotal = val;
         } else {
             int existingToatl = Integer.parseInt(text);

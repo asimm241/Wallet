@@ -8,9 +8,11 @@ import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.view.View;
 import android.widget.TextView;
 
 import com.example.asimm.wallet.Utilities.PreferencesUtilities;
+import com.example.asimm.wallet.Utilities.ViewsUtilities;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -45,7 +47,20 @@ public class MainActivity extends AppCompatActivity {
 
         tabLayout.getTabAt(1).select();
 
-        incomeTextView.setText("RS " + Long.toString(PreferencesUtilities.readIncome()));
+        incomeTextView.setText("Amount: " + Long.toString(PreferencesUtilities.readIncome()));
+        incomeTextView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                ViewsUtilities.showAlertDialog(MainActivity.this, "Clear the Wallet?", new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        PreferencesUtilities.writeIncome(0);
+                        incomeTextView.setText("Amount: " + Long.toString(PreferencesUtilities.readIncome()));
+                        ViewsUtilities.showToast(MainActivity.this, "Youy wallet is empty now");
+                    }
+                });
+            }
+        });
 
 
     }
@@ -82,13 +97,14 @@ public class MainActivity extends AppCompatActivity {
             return 3;
         }
 
+
         @Override
         public CharSequence getPageTitle(int position) {
             switch (position) {
                 case 0:
                     return "Add Income";
                 case 1:
-                    return "Home";
+                    return "Add Expense";
                 case 2:
                     return "History";
                 default:

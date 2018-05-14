@@ -1,8 +1,6 @@
 package com.example.asimm.wallet;
 
 
-import android.app.AlertDialog;
-import android.content.DialogInterface;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
@@ -11,10 +9,10 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.example.asimm.wallet.Utilities.FunctionUtilities;
 import com.example.asimm.wallet.Utilities.PreferencesUtilities;
+import com.example.asimm.wallet.Utilities.ViewsUtilities;
 import com.example.asimm.wallet.database.IncomeFetcher;
 import com.example.asimm.wallet.database.entities.Income;
 
@@ -47,34 +45,34 @@ public class AddIncomeFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_add_income, container, false);
         // Inflate the layout for this fragment
         unbinder = ButterKnife.bind(this, view);
-
         incomeTextView = getActivity().findViewById(R.id.tvIncome);
-
         return view;
 
     }
 
     @OnClick(R.id.button_add_income)
     public void onClickAddIncome(View view) {
-        final long existingIncome = PreferencesUtilities.readIncome();
-        final long enteredIncome = Long.parseLong(addIncomeEditText.getText().toString());
+        if (addIncomeEditText.getText().toString() != null && !addIncomeEditText.getText().toString().equals("")) {
+            final long existingIncome = PreferencesUtilities.readIncome();
+            final long enteredIncome = Long.parseLong(addIncomeEditText.getText().toString());
 
-        AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
-        builder.setMessage("Add " + String.valueOf(enteredIncome) + " in your wallet?")
-                .setPositiveButton("YES", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        long result = existingIncome + enteredIncome;
 
-                        PreferencesUtilities.writeIncome(result);
+            ViewsUtilities.showAlertDialog(getActivity(), "Add " + String.valueOf(enteredIncome) + " in your wallet?", new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    long result = existingIncome + enteredIncome;
 
-                        incomeTextView.setText("RS " + Long.toString(result));
-                        addIncomeEditText.setText("");
-                        addIncomeInDb(enteredIncome);
-                        Toast.makeText(getContext(), "Total Income:" + result, Toast.LENGTH_LONG).show();
-                    }
-                }).setNegativeButton("NO", null).create().show();
+                    PreferencesUtilities.writeIncome(result);
 
+                    incomeTextView.setText("Amount: " + Long.toString(result));
+                    addIncomeEditText.setText("");
+                    addIncomeInDb(enteredIncome);
+                }
+            });
+        }
+        else {
+            ViewsUtilities.showToast(getActivity(), "Add an amount first");
+        }
 
     }
 
@@ -84,6 +82,7 @@ public class AddIncomeFragment extends Fragment {
         income.setDate(FunctionUtilities.getCurrentTimeStamp());
         IncomeFetcher incomeFetcher = new IncomeFetcher();
         incomeFetcher.insertIncome(income);
+        ViewsUtilities.showToast(getActivity(), "Income added to the wallet");
     }
 
 

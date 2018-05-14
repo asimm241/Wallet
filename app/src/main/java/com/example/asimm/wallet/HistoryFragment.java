@@ -11,20 +11,22 @@ import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.DatePicker;
 import android.widget.TextView;
 
 import com.example.asimm.wallet.Utilities.FunctionUtilities;
-import com.example.asimm.wallet.database.SpendingsFetcher;
+import com.example.asimm.wallet.Utilities.ViewsUtilities;
+import com.example.asimm.wallet.database.SpendingFetcher;
 import com.example.asimm.wallet.database.entities.Spending;
 
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
-
-import butterknife.internal.Utils;
 
 
 /**
@@ -51,6 +53,7 @@ public class HistoryFragment extends LifecycleFragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
+        setHasOptionsMenu(true);
         return inflater.inflate(R.layout.fragment_history, container, false);
     }
 
@@ -62,13 +65,6 @@ public class HistoryFragment extends LifecycleFragment {
         endDateText = view.findViewById(R.id.end_date_text);
 
         spendings = new ArrayList<>();
-        for (int i = 0; i < 20; i++) {
-            Spending spending = new Spending();
-            spending.setAmount(10 + i);
-            spending.setCategory("Food");
-            spending.setDate("15-03-2017");
-            spendings.add(spending);
-        }
 
         recyclerView = view.findViewById(R.id.history_recyclerview);
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity(), LinearLayoutManager.VERTICAL, false));
@@ -97,8 +93,8 @@ public class HistoryFragment extends LifecycleFragment {
             }
         });
 
-        final SpendingsFetcher spendingsFetcher = new SpendingsFetcher();
-        LiveData<List<Spending>> spendingsLiveData = spendingsFetcher.getAllSpendings();
+        final SpendingFetcher spendingFetcher = new SpendingFetcher();
+        LiveData<List<Spending>> spendingsLiveData = spendingFetcher.getAllSpendings();
         spendingsLiveData.observe(this, new Observer<List<Spending>>() {
             @Override
             public void onChanged(@Nullable List<Spending> spendingsList) {
@@ -158,13 +154,13 @@ public class HistoryFragment extends LifecycleFragment {
         Calendar endCalendar = Calendar.getInstance();
 
         if (eYear > 0) {
-            endCalendar.set(eYear, eMonth, eDay, 0, 0, 0);
+            endCalendar.set(eYear, eMonth, eDay, 23, 59, 59);
         }
 
-        SpendingsFetcher spendingsFetcher = new SpendingsFetcher();
+        SpendingFetcher spendingFetcher = new SpendingFetcher();
 
-        LiveData<List<Spending>> spendingsLiveData = spendingsFetcher.getPartialSpendings(FunctionUtilities.getTimeStamp(startCalendar)
-                , FunctionUtilities.getTimeStamp(endCalendar));
+        LiveData<List<Spending>> spendingsLiveData = spendingFetcher.getPartialSpendings(startCalendar.getTimeInMillis()
+                , endCalendar.getTimeInMillis());
         spendingsLiveData.observe(this, new Observer<List<Spending>>() {
             @Override
             public void onChanged(@Nullable List<Spending> spendingsList) {
@@ -177,6 +173,32 @@ public class HistoryFragment extends LifecycleFragment {
         });
     }
 
+    @Override
+    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
+        super.onCreateOptionsMenu(menu, inflater);
+        inflater.inflate(R.menu.history_menu, menu);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case R.id.delete_history_item:
+                ViewsUtilities.showAlertDialog(getActivity(), getString(R.string.delete_history_alert_message), new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        // delete history here
+                        SpendingFetcher spendingFetcher = new SpendingFetcher();
+                        spendingFetcher.deleteAllSpendings();
+                        ViewsUtilities.showToast(getActivity(), "History Deleted");
+                    }
+                });
+                break;
+            default:
+                break;
+        }
+        return super.onOptionsItemSelected(item);
+    }
+
     public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewHolder> {
 
         @Override
@@ -187,7 +209,7 @@ public class HistoryFragment extends LifecycleFragment {
 
         @Override
         public void onBindViewHolder(RecyclerViewHolder holder, int position) {
-            holder.date.setText(spendings.get(position).getDate());
+            holder.date.setText(FunctionUtilities.getDate(spendings.get(position).getEpochTimeStamp()));
             holder.category.setText(spendings.get(position).getCategory());
             holder.amount.setText(String.valueOf(spendings.get(position).getAmount()));
         }

@@ -6,6 +6,8 @@ import android.support.v7.app.AlertDialog;
 import android.view.View;
 import android.widget.Toast;
 
+import com.example.asimm.wallet.R;
+
 /**
  * Created by Abdul Haseeb on 4/29/2018.
  */
@@ -13,7 +15,7 @@ import android.widget.Toast;
 public class ViewsUtilities {
 
     public static void showAlertDialog(final Context context, String message, final View.OnClickListener onClickListener) {
-        final AlertDialog.Builder builder = new AlertDialog.Builder(context);
+        final AlertDialog.Builder builder = new AlertDialog.Builder(context, R.style.DialogTheme);
         builder.setTitle("Wallet");
         builder.setMessage(message);
         builder.setCancelable(false);

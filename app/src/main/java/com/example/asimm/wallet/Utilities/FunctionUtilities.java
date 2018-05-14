@@ -27,6 +27,13 @@ public class FunctionUtilities {
         return simpleDateFormat.format(calendar.getTime());
     }
 
+    public static String getDate(long epochTimeStamp) {
+        Calendar calendar = Calendar.getInstance();
+        calendar.setTimeInMillis(epochTimeStamp);
+
+        return getTimeStamp(calendar);
+    }
+
     public static String getDate(dateEnum d, Date date) {
         SimpleDateFormat dateFormat;
         switch (d) {
