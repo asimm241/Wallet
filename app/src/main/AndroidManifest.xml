@@ -10,6 +10,8 @@
         android:roundIcon="@mipmap/ic_wallet"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
+
+
         <activity
             android:name=".MainActivity"
             android:screenOrientation="portrait"
