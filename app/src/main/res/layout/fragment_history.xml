@@ -11,6 +11,7 @@
         android:src="@drawable/arrow_ico"
         android:layout_marginTop="@dimen/_10sdp"
         android:layout_centerHorizontal="true"
+        android:contentDescription="@string/to"
         />
 
     <TextView

@@ -1,5 +1,6 @@
 package com.example.asimm.wallet;
 
+import android.content.Context;
 import android.os.Bundle;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
@@ -9,6 +10,7 @@ import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.TextView;
 
 import com.example.asimm.wallet.Utilities.PreferencesUtilities;
@@ -18,7 +20,7 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.Unbinder;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity implements ViewPager.OnPageChangeListener {
 
     Unbinder unbinder;
 
@@ -45,6 +47,8 @@ public class MainActivity extends AppCompatActivity {
         pager.setAdapter(pagerAdapter);
         tabLayout.setupWithViewPager(pager);
 
+        pager.addOnPageChangeListener(this);
+
         tabLayout.getTabAt(1).select();
 
         incomeTextView.setText("Amount: " + Long.toString(PreferencesUtilities.readIncome()));
@@ -70,6 +74,25 @@ public class MainActivity extends AppCompatActivity {
     protected void onDestroy() {
         super.onDestroy();
         unbinder.unbind();
+    }
+
+    @Override
+    public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
+        View view = this.getCurrentFocus();
+        if (view != null) {
+            InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
+            imm.hideSoftInputFromWindow(view.getWindowToken(), 0);
+        }
+    }
+
+    @Override
+    public void onPageSelected(int position) {
+
+    }
+
+    @Override
+    public void onPageScrollStateChanged(int state) {
+
     }
 
     public class PagerAdapter extends FragmentPagerAdapter {
