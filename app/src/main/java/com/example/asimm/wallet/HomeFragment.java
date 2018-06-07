@@ -102,7 +102,7 @@ public class HomeFragment extends LifecycleFragment {
     private void setIncome() {
         String text = mTotalEditText.getText().toString();
         if (text.equals("") || text == null) {
-            Toast.makeText(getActivity(), "No Spending Entered", Toast.LENGTH_LONG).show();
+            Toast.makeText(getActivity(), R.string.no_spending_entered, Toast.LENGTH_LONG).show();
             return;
         } else {
             final int expense = Integer.parseInt(text);
@@ -181,6 +181,7 @@ public class HomeFragment extends LifecycleFragment {
         arrayAdapter.add("Shopping");
         arrayAdapter.add("Traveling");
         arrayAdapter.add("Utilities");
+        arrayAdapter.add("Medication");
         arrayAdapter.add("Other");
 
         builderSingle.setNegativeButton("cancel", new DialogInterface.OnClickListener() {
