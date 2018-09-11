@@ -16,64 +16,39 @@ import android.widget.TextView;
 import com.example.asimm.wallet.Utilities.PreferencesUtilities;
 import com.example.asimm.wallet.Utilities.ViewsUtilities;
 
-import butterknife.BindView;
-import butterknife.ButterKnife;
-import butterknife.Unbinder;
+public class MainActivity extends AppCompatActivity implements ViewPager.OnPageChangeListener, View.OnClickListener {
 
-public class MainActivity extends AppCompatActivity implements ViewPager.OnPageChangeListener {
-
-    Unbinder unbinder;
-
-    @BindView(R.id.toolbar)
     Toolbar toolbar;
-
-    @BindView(R.id.tablayout)
     TabLayout tabLayout;
-
-    @BindView(R.id.view_pager)
     ViewPager pager;
-
-    @BindView(R.id.tvIncome)
     TextView incomeTextView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        unbinder = ButterKnife.bind(this);
         setSupportActionBar(toolbar);
 
         PagerAdapter pagerAdapter = new PagerAdapter(getSupportFragmentManager());
+        pager = findViewById(R.id.view_pager);
+        tabLayout = findViewById(R.id.tablayout);
+        incomeTextView = findViewById(R.id.tvIncome);
         pager.setAdapter(pagerAdapter);
         tabLayout.setupWithViewPager(pager);
+
+        incomeTextView.setOnClickListener(this);
 
         pager.addOnPageChangeListener(this);
 
         tabLayout.getTabAt(1).select();
 
         incomeTextView.setText("Amount: " + Long.toString(PreferencesUtilities.readIncome()));
-        incomeTextView.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                ViewsUtilities.showAlertDialog(MainActivity.this, "Clear the Wallet?", new View.OnClickListener() {
-                    @Override
-                    public void onClick(View view) {
-                        PreferencesUtilities.writeIncome(0);
-                        incomeTextView.setText("Amount: " + Long.toString(PreferencesUtilities.readIncome()));
-                        ViewsUtilities.showToast(MainActivity.this, "Youy wallet is empty now");
-                    }
-                });
-            }
-        });
-
-
     }
 
 
     @Override
     protected void onDestroy() {
         super.onDestroy();
-        unbinder.unbind();
     }
 
     @Override
@@ -94,6 +69,25 @@ public class MainActivity extends AppCompatActivity implements ViewPager.OnPageC
     public void onPageScrollStateChanged(int state) {
 
     }
+
+    @Override
+    public void onClick(View view) {
+        switch (view.getId()) {
+            case R.id.tvIncome:
+                ViewsUtilities.showAlertDialog(MainActivity.this, getString(R.string.app_name), "Clear the Wallet?", new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        PreferencesUtilities.writeIncome(0);
+                        incomeTextView.setText("Amount: " + Long.toString(PreferencesUtilities.readIncome()));
+                        ViewsUtilities.showToast(MainActivity.this, "Youy wallet is empty now");
+                    }
+                });
+                break;
+            default:
+                break;
+        }
+    }
+
 
     public class PagerAdapter extends FragmentPagerAdapter {
 

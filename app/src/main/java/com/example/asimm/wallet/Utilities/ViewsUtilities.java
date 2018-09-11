@@ -14,9 +14,9 @@ import com.example.asimm.wallet.R;
 
 public class ViewsUtilities {
 
-    public static void showAlertDialog(final Context context, String message, final View.OnClickListener onClickListener) {
+    public static void showAlertDialog(final Context context,String title, String message, final View.OnClickListener onClickListener) {
         final AlertDialog.Builder builder = new AlertDialog.Builder(context, R.style.DialogTheme);
-        builder.setTitle("Wallet");
+        builder.setTitle(title);
         builder.setMessage(message);
         builder.setCancelable(false);
         builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
@@ -40,5 +40,7 @@ public class ViewsUtilities {
     public static void showToast(Context context, String message) {
         Toast.makeText(context, message, Toast.LENGTH_SHORT).show();
     }
+
+
 
 }

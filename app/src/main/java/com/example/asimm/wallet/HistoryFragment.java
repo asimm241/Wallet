@@ -2,7 +2,6 @@ package com.example.asimm.wallet;
 
 
 import android.app.DatePickerDialog;
-import android.arch.lifecycle.LifecycleFragment;
 import android.arch.lifecycle.LiveData;
 import android.arch.lifecycle.Observer;
 import android.os.Bundle;
@@ -32,7 +31,7 @@ import java.util.List;
 /**
  * A simple {@link Fragment} subclass.
  */
-public class HistoryFragment extends LifecycleFragment {
+public class HistoryFragment extends Fragment {
 
     TextView startDateText;
     TextView endDateText;
@@ -47,7 +46,6 @@ public class HistoryFragment extends LifecycleFragment {
     public HistoryFragment() {
         // Required empty public constructor
     }
-
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -175,15 +173,15 @@ public class HistoryFragment extends LifecycleFragment {
 
     @Override
     public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
-        super.onCreateOptionsMenu(menu, inflater);
         inflater.inflate(R.menu.history_menu, menu);
+        super.onCreateOptionsMenu(menu, inflater);
     }
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case R.id.delete_history_item:
-                ViewsUtilities.showAlertDialog(getActivity(), getString(R.string.delete_history_alert_message), new View.OnClickListener() {
+                ViewsUtilities.showAlertDialog(getActivity(), getString(R.string.app_name), getString(R.string.delete_history_alert_message), new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
                         // delete history here
@@ -208,10 +206,25 @@ public class HistoryFragment extends LifecycleFragment {
         }
 
         @Override
-        public void onBindViewHolder(RecyclerViewHolder holder, int position) {
+        public void onBindViewHolder(RecyclerViewHolder holder, final int position) {
             holder.date.setText(FunctionUtilities.getDate(spendings.get(position).getEpochTimeStamp()));
             holder.category.setText(spendings.get(position).getCategory());
             holder.amount.setText(String.valueOf(spendings.get(position).getAmount()));
+
+
+            holder.itemView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    if (spendings.get(position).getDetail() != null && !spendings.get(position).getDetail().equals("")) {
+                        ViewsUtilities.showAlertDialog(getActivity(), "Detail", spendings.get(position).getDetail(), new View.OnClickListener() {
+                            @Override
+                            public void onClick(View view) {
+
+                            }
+                        });
+                    }
+                }
+            });
         }
 
         @Override
