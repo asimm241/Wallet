@@ -17,6 +17,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.DatePicker;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.asimm.wallet.Utilities.FunctionUtilities;
 import com.example.asimm.wallet.Utilities.ViewsUtilities;
@@ -51,13 +52,15 @@ public class HistoryFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        setHasOptionsMenu(true);
+
+        this.setHasOptionsMenu(true);
         return inflater.inflate(R.layout.fragment_history, container, false);
     }
 
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+
 
         startDateText = view.findViewById(R.id.start_date_text);
         endDateText = view.findViewById(R.id.end_date_text);
@@ -173,8 +176,8 @@ public class HistoryFragment extends Fragment {
 
     @Override
     public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
-        inflater.inflate(R.menu.history_menu, menu);
         super.onCreateOptionsMenu(menu, inflater);
+        inflater.inflate(R.menu.history_menu, menu);
     }
 
     @Override

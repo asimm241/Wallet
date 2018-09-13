@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
-<item
-    android:title="Delete History"
-    app:showAsAction="never"
-    android:id="@+id/delete_history_item"
-    />
+    <item
+        android:id="@+id/delete_history_item"
+        android:title="Delete History"
+        android:visible="true"
+        app:showAsAction="never" />
 </menu>
