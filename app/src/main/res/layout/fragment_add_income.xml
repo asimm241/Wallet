@@ -3,7 +3,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/textColor"
-    tools:context="com.example.asimm.wallet.AddIncomeFragment">
+    tools:context="com.example.asimm.wallet.com.example.asimm.home.views.fragments.AddIncomeFragment">
 
 
     <RelativeLayout

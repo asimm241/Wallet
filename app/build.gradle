@@ -3,7 +3,7 @@ apply plugin: 'com.android.application'
 android {
     compileSdkVersion 27
     defaultConfig {
-        applicationId "com.example.asimm.wallet"
+        applicationId "com.wallet.app"
         minSdkVersion 15
         targetSdkVersion 27
         versionCode 1
@@ -40,8 +40,8 @@ dependencies {
     annotationProcessor 'com.jakewharton:butterknife:8.8.1'
     testImplementation 'junit:junit:4.12'
 
-    compile "android.arch.lifecycle:extensions:1.1.1"
-    compile "android.arch.persistence.room:runtime:1.1.1"
+    implementation "android.arch.lifecycle:extensions:1.1.1"
+    implementation "android.arch.persistence.room:runtime:1.1.1"
     annotationProcessor "android.arch.lifecycle:compiler:1.1.1"
     annotationProcessor "android.arch.persistence.room:compiler:1.1.1"
 

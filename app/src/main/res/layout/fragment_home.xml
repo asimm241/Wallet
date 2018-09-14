@@ -3,7 +3,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/textColor"
-    tools:context="com.example.asimm.wallet.HomeFragment">
+    tools:context="com.example.asimm.wallet.com.example.asimm.home.views.fragments.HomeFragment">
 
     <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:app="http://schemas.android.com/apk/res-auto"
@@ -12,7 +12,7 @@
         android:layout_height="match_parent"
         android:background="@color/mainBackground"
         android:orientation="vertical"
-        tools:context="com.example.asimm.wallet.MainActivity">
+        tools:context="com.example.asimm.wallet.com.example.asimm.home.MainActivity">
 
 
         <LinearLayout

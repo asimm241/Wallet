@@ -6,4 +6,6 @@
     <string name="delete_history_alert_message">Are you sure you want to delete all the history?</string>
     <string name="to">to</string>
     <string name="no_spending_entered">No Spending Entered</string>
+    <string name="no_detail_text">No Detail Added</string>
+    <string name="detail_hint">Detail (Optional)</string>
 </resources>

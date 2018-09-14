@@ -3,7 +3,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/textColor"
-    tools:context="com.example.asimm.wallet.HistoryFragment">
+    tools:context="com.example.asimm.wallet.com.example.asimm.home.views.fragments.HistoryFragment">
 
     <ImageView
         android:layout_width="@dimen/_40sdp"
